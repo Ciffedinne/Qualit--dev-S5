@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="r5a08_findmyword_tp3.WordTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2025-11-06T10:02:54" hostname="einfolearning" time="0.032">
+  <properties/>
+  <testcase name="should_mark_incorrect_letter_when_guess_is_wrong()" classname="r5a08_findmyword_tp3.WordTest" time="0.031"/>
+  <testcase name="should_mark_correct_letter_when_guess_is_right()" classname="r5a08_findmyword_tp3.WordTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
