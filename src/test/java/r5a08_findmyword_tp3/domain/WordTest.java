@@ -8,49 +8,41 @@ public class WordTest {
 
     @Test
     void should_check_one_incorrect_letter() {
-        // Arrange
-        Word word = new Word(correctWord: "E"); // Le mot à deviner fait une lettre
-
-        // Act
-        Score score = word.guess(attempt: "B");
-
-        // Assert
+        Word word = new Word("E");
+        Score score = word.guess("B");
         assertScoreForGuess(score, INCORRECT);
     }
 
     @Test
     void should_check_one_correct_letter() {
-        // Arrange
-        Word word = new Word(correctWord: "E"); // Le mot à deviner fait une lettre
-
-        // Act
-        Score score = word.guess(attempt: "E");
-
-        // Assert
+        Word word = new Word("E");
+        Score score = word.guess("E");
         assertScoreForGuess(score, CORRECT);
     }
 
     @Test
     void should_check_second_letter_wrong_position() {
-        Word word = new Word(correctWord: "EM");
-        Score score = word.guess(attempt: "GE");
-
+        Word word = new Word("EM");
+        Score score = word.guess("GE");
         assertScoreForGuess(score, INCORRECT, PART_CORRECT);
     }
 
     @Test
     void should_check_all_score_combinations_correct() {
-        Word word = new Word(correctWord: "EMI");
-        Score score = word.guess(attempt: "GET");
-
-        assertScoreForGuess(score, INCORRECT, PART_CORRECT, CORRECT);
+        Word word = new Word("EMI");
+        Score score = word.guess("GET");
+        assertScoreForGuess(score, INCORRECT, PART_CORRECT, INCORRECT);
     }
 
     private void assertScoreForGuess(Score score, Letter... expectedScores) {
+        assertThat(score.size())
+                .as("Le score doit contenir %d lettres", expectedScores.length)
+                .isEqualTo(expectedScores.length);
+
         for (int position = 0; position < expectedScores.length; position++) {
-            Letter expected = expectedScores[position];
             assertThat(score.letter(position))
-                    .isEqualTo(expected);
+                    .as("Position %d", position)
+                    .isEqualTo(expectedScores[position]);
         }
     }
 }

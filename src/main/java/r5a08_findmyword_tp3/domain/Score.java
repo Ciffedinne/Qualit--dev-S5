@@ -13,12 +13,13 @@ public class Score {
         this.correct = correct;
     }
 
-    public void assess(String attempt, String s) {
+    public void assess(String attempt) {
+        results.clear();
+        position = 0;
         for (char currentLetter : attempt.toCharArray()) {
             results.add(scoreForLetter(currentLetter));
             position++;
         }
-        position = 0;
     }
 
     private Letter scoreForLetter(char currentLetter) {
@@ -32,14 +33,18 @@ public class Score {
     }
 
     private boolean isCorrectLetter(char currentLetter) {
-        return correct.charAt(position) == currentLetter;
+        return position < correct.length() && correct.charAt(position) == currentLetter;
     }
 
     private boolean isLetterOccursInWord(char currentLetter) {
-        return correct.contains(String.valueOf(currentLetter));
+        return correct.indexOf(currentLetter) != -1;
     }
 
     public Letter letter(int i) {
         return results.get(i);
+    }
+
+    public int size() {
+        return results.size();
     }
 }
